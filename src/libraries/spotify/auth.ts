@@ -1,4 +1,5 @@
 import getPkce from 'oauth-pkce';
+import { SpotifyApi } from './api';
 
 const spotifyAuthorizeUrl = 'https://accounts.spotify.com/authorize';
 const spotifyTokenUrl = 'https://accounts.spotify.com/api/token';
@@ -22,6 +23,16 @@ if(!clientId)
 
 export class SpotifyAuth
 {
+  static async isLoggedIn()
+  {
+    const accessToken = accessTokenHandler.get();
+    if(!accessToken)
+      return false;
+
+    await SpotifyApi.getIsPlaying(true);
+    return true;
+  }
+
   static async login()
   {
     /* Get the code challenge and code verifier for OAuth PKCE login. */

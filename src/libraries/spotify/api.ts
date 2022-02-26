@@ -2,9 +2,14 @@ import SpotifyWebApi from 'spotify-web-api-js';
 import { SpotifyAuth } from './auth';
 
 const api = new SpotifyWebApi();
-const accessToken = SpotifyAuth.getAccessToken();
-if(accessToken)
-  api.setAccessToken(accessToken);
+let accessToken: string | undefined;
+try
+{
+  accessToken = SpotifyAuth.getAccessToken();
+  if(accessToken)
+    api.setAccessToken(accessToken);
+}
+catch(error) { }
 
 export class SpotifyApi
 {
@@ -16,7 +21,7 @@ export class SpotifyApi
       api.setAccessToken(token);
   }
 
-  static async getIsPlaying()
+  static async getIsPlaying(throwError?: boolean)
   {
     if(SpotifyApi.isPlaying === undefined)
     {
@@ -27,7 +32,10 @@ export class SpotifyApi
       }
       catch(error)
       {
-        console.error(error);
+        if(throwError)
+          throw error;
+
+        handleError(error);
       }
     }
 
@@ -49,7 +57,7 @@ export class SpotifyApi
     catch(error: any)
     {
       if(error.status !== 404)
-        return console.error(error);
+        return handleError(error);
 
       startOnNewDevice = true;
     }
@@ -69,7 +77,7 @@ export class SpotifyApi
     }
     catch(error)
     {
-      return console.error(error);
+      handleError(error);
     }
   }
 
@@ -86,7 +94,7 @@ export class SpotifyApi
     }
     catch(error)
     {
-      console.error(error);
+      handleError(error);
     }
   }
 
@@ -103,4 +111,12 @@ export class SpotifyApi
   {
     return api.getMyDevices();
   }
+}
+
+function handleError(error: any)
+{
+  if(error.status === 401)
+    location.href = '/login';
+  else
+    console.error(error);
 }
