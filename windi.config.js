@@ -9,11 +9,17 @@ export default defineConfig({
       colors: {
         primary: {
           DEFAULT: 'var(--color-primary)',
+          dark: 'var(--color-primary-dark)',
         },
         background: {
           DEFAULT: 'var(--color-background)',
         },
-        spotify: 'var(--color-spotify)',
+        spotify: {
+          DEFAULT: 'var(--color-spotify)',
+          dark: 'var(--color-spotify-dark)',
+        },
+        black: 'var(--color-black)',
+        white: 'var(--color-white)',
       },
     },
   },
