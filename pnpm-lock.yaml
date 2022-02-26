@@ -3,7 +3,9 @@ lockfileVersion: 5.3
 specifiers:
   '@fortawesome/fontawesome-free': ^6.0.0
   '@vitejs/plugin-vue': ^2.2.0
+  oauth-pkce: ^0.0.6
   sass: ^1.49.9
+  spotify-web-api-js: ^1.5.2
   typescript: ^4.5.4
   vite: ^2.8.0
   vite-plugin-pages: ^0.20.2
@@ -19,7 +21,9 @@ dependencies:
 devDependencies:
   '@fortawesome/fontawesome-free': 6.0.0
   '@vitejs/plugin-vue': 2.2.2_vite@2.8.4+vue@3.2.31
+  oauth-pkce: 0.0.6
   sass: 1.49.9
+  spotify-web-api-js: 1.5.2
   typescript: 4.5.5
   vite: 2.8.4_sass@1.49.9
   vite-plugin-pages: 0.20.2_vite@2.8.4
@@ -1044,6 +1048,10 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
+  /oauth-pkce/0.0.6:
+    resolution: {integrity: sha512-hLLZvwJBAo1QHzPOvsM/QtDj/b9MBgQx/TH4kA/LPqFgWtICo4m7gtZUZARBiQ0I8lSKQRN8BhGTclVv8D45gg==}
+    dev: true
+
   /object-assign/4.1.1:
     resolution: {integrity: sha1-IQmtx5ZYh8/AXLvUQsrIv7s2CGM=}
     engines: {node: '>=0.10.0'}
@@ -1280,6 +1288,10 @@ packages:
 
   /sourcemap-codec/1.4.8:
     resolution: {integrity: sha512-9NykojV5Uih4lgo5So5dtw+f0JgJX30KCNI8gwhz2J9A15wD0Ml6tjHKwf6fTSa6fAdVBdZeNOs9eJ71qCk8vA==}
+
+  /spotify-web-api-js/1.5.2:
+    resolution: {integrity: sha512-ie1gbg1wCabfobIkXTIBLUMyULS/hMCpF44Cdx2pAO0/+FrjhNSDjlDzcwCEDy+ZIo3Fscs+Gkg/GTeQ/ijo+Q==}
+    dev: true
 
   /string.prototype.trimend/1.0.4:
     resolution: {integrity: sha512-y9xCjw1P23Awk8EvTpcyL2NIr1j7wJ39f+k6lvRnSMz+mz9CGz9NYPelDk42kOz6+ql8xjfK8oYzy3jAP5QU5A==}
