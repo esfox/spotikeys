@@ -29,7 +29,7 @@ export class SpotifyAuth
     if(!accessToken)
       return false;
 
-    await SpotifyApi.getIsPlaying(true);
+    await SpotifyApi.getUserProfile();
     return true;
   }
 

@@ -9,114 +9,77 @@ try
   if(accessToken)
     api.setAccessToken(accessToken);
 }
-catch(error) { }
+catch(error)
+{
+  console.error(error);
+}
 
 export class SpotifyApi
 {
-  static isPlaying: boolean;
+  static getUserProfile = () => api.getMe();
 
-  static setToken(token: string)
+  static setToken = async (token: string) =>
   {
     if(!accessToken)
       api.setAccessToken(token);
   }
 
-  static async getIsPlaying(throwError?: boolean)
+  static play = async () => playWithNewActiveDevice(api.play);
+
+  static pause = async () => await api.pause();
+
+  static previous = () => playWithNewActiveDevice(api.skipToPrevious, true);
+
+  static next = async () => playWithNewActiveDevice(api.skipToNext, true);
+
+  static getDevices = async () => api.getMyDevices();
+
+  static getPlaylists = async ({
+    userId,
+    limit,
+    offset,
+  }: {
+    userId?: string,
+    limit?: number,
+    offset?: number,
+  } = { limit: 10 }) =>
   {
-    if(SpotifyApi.isPlaying === undefined)
-    {
-      try
-      {
-        const playbackState = await api.getMyCurrentPlaybackState();
-        SpotifyApi.isPlaying = playbackState.is_playing;
-      }
-      catch(error)
-      {
-        if(throwError)
-          throw error;
+    const params: { limit?: number, offset?: number } = {}
+    if(limit)
+      params.limit = limit;
+    if(offset)
+      params.offset = offset;
 
-        handleError(error);
-      }
-    }
-
-    return SpotifyApi.isPlaying;
-  }
-
-  static async play()
-  {
-    const isPlaying = await SpotifyApi.getIsPlaying();
-    if(isPlaying)
-      return;
-
-    let startOnNewDevice = false;
-    try
-    {
-      await api.play();
-      SpotifyApi.isPlaying = !SpotifyApi.isPlaying;
-    }
-    catch(error: any)
-    {
-      if(error.status !== 404)
-        return handleError(error);
-
-      startOnNewDevice = true;
-    }
-
-    if(!startOnNewDevice)
-      return;
-
-    try
-    {
-      const { devices } = await api.getMyDevices();
-      const deviceId = devices.pop()?.id;
-      if(!deviceId)
-        return;
-
-      await api.transferMyPlayback([deviceId], { play: true });
-      SpotifyApi.isPlaying = !SpotifyApi.isPlaying;
-    }
-    catch(error)
-    {
-      handleError(error);
-    }
-  }
-
-  static async pause()
-  {
-    const isPlaying = await SpotifyApi.getIsPlaying();
-    if(!isPlaying)
-      return;
-
-    try
-    {
-      await api.pause();
-      SpotifyApi.isPlaying = !SpotifyApi.isPlaying;
-    }
-    catch(error)
-    {
-      handleError(error);
-    }
-  }
-
-  static async togglePlayback()
-  {
-    const isPlaying = await SpotifyApi.getIsPlaying();
-    if(isPlaying)
-      SpotifyApi.pause();
-    else
-      SpotifyApi.play();
-  }
-
-  static async getDevices()
-  {
-    return api.getMyDevices();
-  }
+    return api.getUserPlaylists(userId, params);
+  };
 }
 
-function handleError(error: any)
+/* This executes the given function call, but does
+  also sets a new active device if there is none. */
+async function playWithNewActiveDevice(playbackCall: Function, transferPlaybackOnly?: boolean)
 {
-  if(error.status === 401)
-    location.href = '/login';
-  else
-    console.error(error);
+  let startOnNewDevice = false;
+  try
+  {
+    await playbackCall();
+  }
+  catch(error: any)
+  {
+    if(error.status === 404)
+      startOnNewDevice = true;
+    else
+      throw error;
+  }
+
+  if(!startOnNewDevice)
+    return;
+
+  const { devices } = await api.getMyDevices();
+  const deviceId = devices.pop()?.id;
+  if(!deviceId)
+    return;
+
+  await api.transferMyPlayback([deviceId], { play: !transferPlaybackOnly });
+  if(!transferPlaybackOnly)
+    await playbackCall();
 }

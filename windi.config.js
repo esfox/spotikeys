@@ -13,10 +13,15 @@ export default defineConfig({
         },
         background: {
           DEFAULT: 'var(--color-background)',
+          light: 'var(--color-background-light)',
+          lighter: 'var(--color-background-lighter)',
         },
         spotify: {
           DEFAULT: 'var(--color-spotify)',
           dark: 'var(--color-spotify-dark)',
+        },
+        hover: {
+          light: 'var(--color-hover-light)',
         },
         black: 'var(--color-black)',
         white: 'var(--color-white)',

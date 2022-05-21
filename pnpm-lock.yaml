@@ -2,10 +2,14 @@ lockfileVersion: 5.3
 
 specifiers:
   '@fortawesome/fontawesome-free': ^6.0.0
+  '@types/spotify-web-playback-sdk': ^0.1.12
   '@vitejs/plugin-vue': ^2.2.0
+  ky: ^0.29.0
   oauth-pkce: ^0.0.6
+  pinia: ^2.0.11
   sass: ^1.49.9
   spotify-web-api-js: ^1.5.2
+  tinykeys: ^1.4.0
   typescript: ^4.5.4
   vite: ^2.8.0
   vite-plugin-pages: ^0.20.2
@@ -20,10 +24,14 @@ dependencies:
 
 devDependencies:
   '@fortawesome/fontawesome-free': 6.0.0
+  '@types/spotify-web-playback-sdk': 0.1.12
   '@vitejs/plugin-vue': 2.2.2_vite@2.8.4+vue@3.2.31
+  ky: 0.29.0
   oauth-pkce: 0.0.6
+  pinia: 2.0.11_typescript@4.5.5+vue@3.2.31
   sass: 1.49.9
   spotify-web-api-js: 1.5.2
+  tinykeys: 1.4.0
   typescript: 4.5.5
   vite: 2.8.4_sass@1.49.9
   vite-plugin-pages: 0.20.2_vite@2.8.4
@@ -99,6 +107,10 @@ packages:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.13.0
+    dev: true
+
+  /@types/spotify-web-playback-sdk/0.1.12:
+    resolution: {integrity: sha512-qlKVNdHiQLSztUoMTz7Zo8Dxmzcd1k89Ct2XsNMVl8BfCzotovae/hSLvHPoua/N8i592LZ1q0SsgtQH6JT+vA==}
     dev: true
 
   /@types/throttle-debounce/2.1.0:
@@ -1000,6 +1012,11 @@ packages:
     resolution: {integrity: sha512-lxpCM3HTvquGxKGzHeknB/sUjuVoUElLlfYnXZT73K8geR9jQbroGlSCFBax9/0mpGoD3kzcMLnOlGQPJJNyqQ==}
     dev: true
 
+  /ky/0.29.0:
+    resolution: {integrity: sha512-01TBSOqlHmLfcQhHseugGHLxPtU03OyZWaLDWt5MfzCkijG6xWFvAQPhKVn0cR2MMjYvBP9keQ8A3+rQEhLO5g==}
+    engines: {node: '>=12'}
+    dev: true
+
   /local-pkg/0.4.1:
     resolution: {integrity: sha512-lL87ytIGP2FU5PWwNDo0w3WhIo2gopIAxPg9RxDYF7m4rr5ahuZxP22xnJHIvaLTe4Z9P6uKKY2UHiwyB4pcrw==}
     engines: {node: '>=14'}
@@ -1094,6 +1111,24 @@ packages:
   /picomatch/2.3.1:
     resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
     engines: {node: '>=8.6'}
+    dev: true
+
+  /pinia/2.0.11_typescript@4.5.5+vue@3.2.31:
+    resolution: {integrity: sha512-JzcmnMqu28PNWOjDgEDK6fTrIzX8eQZKPPKvu/fpHdpXARUj1xeVdFi3YFIMOWswqaBd589cpmAMdSSTryI9iw==}
+    peerDependencies:
+      '@vue/composition-api': ^1.4.0
+      typescript: '>=4.4.4'
+      vue: ^2.6.14 || ^3.2.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+      typescript:
+        optional: true
+    dependencies:
+      '@vue/devtools-api': 6.0.12
+      typescript: 4.5.5
+      vue: 3.2.31
+      vue-demi: 0.12.1_vue@3.2.31
     dev: true
 
   /postcss/8.4.7:
@@ -1312,6 +1347,10 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
+  /tinykeys/1.4.0:
+    resolution: {integrity: sha512-ysnVd2E4nWbNXIbHaUidcKGLTmNimqP0hdpsD0Ph5hPJ84ntCF6PHj+Jg3im9nZt9/hNsBg/E6m1psHc2KaPnQ==}
+    dev: true
+
   /to-fast-properties/2.0.0:
     resolution: {integrity: sha1-3F5pjL0HkmW8c+A3doGk5Og/YW4=}
     engines: {node: '>=4'}
@@ -1526,6 +1565,21 @@ packages:
       vscode-languageserver-textdocument: 1.0.4
       vscode-pug-languageservice: 0.29.8
       vscode-typescript-languageservice: 0.29.8
+    dev: true
+
+  /vue-demi/0.12.1_vue@3.2.31:
+    resolution: {integrity: sha512-QL3ny+wX8c6Xm1/EZylbgzdoDolye+VpCXRhI2hug9dJTP3OUJ3lmiKN3CsVV3mOJKwFi0nsstbgob0vG7aoIw==}
+    engines: {node: '>=12'}
+    hasBin: true
+    requiresBuild: true
+    peerDependencies:
+      '@vue/composition-api': ^1.0.0-rc.1
+      vue: ^3.0.0-0 || ^2.6.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+    dependencies:
+      vue: 3.2.31
     dev: true
 
   /vue-router/4.0.12_vue@3.2.31:
